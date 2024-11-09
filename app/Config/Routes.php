@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Front\Home::index');
+$routes->get('/', 'Admin\MenuController::getSiteMenu');
 
 $routes->group('admin', static function ($routes) {
     $routes->group('/', ['filter' => 'adminAuth'], static function ($routes) {
