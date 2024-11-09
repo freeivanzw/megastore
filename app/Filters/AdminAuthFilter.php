@@ -11,8 +11,9 @@ class AdminAuthFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $session = \Config\Services::session();
-
-        if (!$session->get('admin_id')) {
+        $admin_id = $session->get('admin_id');
+        
+        if (!isset($admin_id)) {
             return redirect()->to('/');
         }
     }

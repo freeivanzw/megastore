@@ -5,12 +5,13 @@ namespace App\Controllers\Admin;
 class MenuController extends AdminController
 {
 
-    public function getSiteMenu()
+    public function index()
     {
         $menu_items_model = new \App\Models\MenuItemsModel();
 
-        dd($menu_items_model->getTopMenu());
-
+        return $this->view
+            ->addComponent('Admin/Components/SiteMenu')
+            ->render();
     }
 
 }

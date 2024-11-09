@@ -8,10 +8,15 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Admin\MenuController::getSiteMenu');
+$routes->get('/', 'Front\Home::index');
 
 $routes->group('admin', static function ($routes) {
     $routes->group('/', ['filter' => 'adminAuth'], static function ($routes) {
+        $routes->get('/', 'Admin\PagesController::index');
+
+        $routes->group('menu', static function ($routes) {
+            $routes->get('/', 'Admin\MenuController::index');
+        });
 
         $routes->group('auth', static function ($routes) {
             $routes->get('logout', 'Admin\AuthController::logout');

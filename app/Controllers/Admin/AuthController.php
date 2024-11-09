@@ -19,6 +19,7 @@ class AuthController extends AdminController
     {
         
         return $this->view
+            ->setLayout('Admin/Simple')
             ->addComponent('Admin/Components/Login')
             ->render();
     }
@@ -39,8 +40,7 @@ class AuthController extends AdminController
 
             $this->session->set('admin_id', (int)$admin['admin_id']);
 
-            // return redirect()->to('admin');
-            return redirect()->to('/');
+            return redirect()->to('admin');
         } catch (Exception $err) {
             return redirect()->back()->with('errors', true)->withInput();
         }

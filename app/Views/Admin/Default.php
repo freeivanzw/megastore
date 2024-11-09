@@ -18,7 +18,7 @@
         </div>
             
         <div class="content">
-            <?= $this->renderSection('content'); ?>
+            <?= $content; ?> 
         </div>
     </div>    
 

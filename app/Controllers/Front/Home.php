@@ -6,7 +6,6 @@ class Home extends FrontController
 {
     public function index(): string
     {
-        
 
         return view('welcome_message');
     }
