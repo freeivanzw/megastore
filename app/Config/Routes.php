@@ -16,6 +16,7 @@ $routes->group('admin', static function ($routes) {
 
         $routes->group('menu', static function ($routes) {
             $routes->get('/', 'Admin\MenuController::index');
+            $routes->delete('/', 'Admin\MenuController::removeMenu');
         });
 
         $routes->group('auth', static function ($routes) {

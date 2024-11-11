@@ -18,13 +18,8 @@ class MenuItemsModel extends Model
     {
         $menu_main_item = $this->where('id', 1)->find()[0];
         $menu_items = $this->findAll();
-        
-        $top_menu[] = [
-            ...$menu_main_item,
-            'children' => $this->recurionSortingMenu($menu_items, 1)
-        ];
 
-        return $top_menu;
+        return $this->recurionSortingMenu($menu_items, 1);
     }
 
     /**
