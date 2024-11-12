@@ -6,6 +6,8 @@
     <title>MyProject</title>
     <link rel="stylesheet" href="<?=base_url('css/bootstrap.min.css');?>">
     <link rel="stylesheet" href="<?=base_url('css/admin.css');?>">
+
+    <script src="<?=base_url('js/jquery-3.7.1.min.js');?>"></script>
 </head>
 <body>
     <div class="admin_wrapper container-lg mt-5 mb-5">
@@ -22,6 +24,7 @@
         </div>
     </div>    
 
+    
     <script src="<?=base_url('js/bootstrap.bundle.min.js');?>"></script>
     <script src="<?=base_url('js/admin.js');?>"></script>
 </body>

@@ -6,6 +6,7 @@
     <title>MyProject</title>
     <link rel="stylesheet" href="<?=base_url('css/bootstrap.min.css');?>">
     <link rel="stylesheet" href="<?=base_url('css/admin.css');?>">
+    <script src="<?=base_url('js/jquery-3.7.1.min.js');?>"></script>
 </head>
 <body>
     <?= $content; ?> 

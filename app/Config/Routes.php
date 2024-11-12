@@ -16,7 +16,9 @@ $routes->group('admin', static function ($routes) {
 
         $routes->group('menu', static function ($routes) {
             $routes->get('/', 'Admin\MenuController::index');
-            $routes->delete('/', 'Admin\MenuController::removeMenu');
+            $routes->post('(:num)', 'Admin\MenuController::createSubmenu/$1');
+            $routes->patch('(:num)', 'Admin\MenuController::editMenu/$1');
+            $routes->delete('(:num)', 'Admin\MenuController::removeMenu/$1');
         });
 
         $routes->group('auth', static function ($routes) {

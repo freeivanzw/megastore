@@ -16,8 +16,10 @@ class MenuController extends AdminController
 
     public function index()
     {
+        $menu_items = $this->model->getTopMenu();
+
         $data = [
-            'top_menu' => $this->model->getTopMenu(),
+            'top_menu' => view('Admin/Components/TopMenu', ['menu_items' => $menu_items]),
         ];
 
         return $this->view
@@ -25,10 +27,33 @@ class MenuController extends AdminController
             ->render();
     }
 
-    public function removeMenu()
+    public function createSubmenu(int $parent_id)
     {
-        $menu_id = $this->request->getGet('menu_id');
+        $menu_item = $this->model->find($parent_id);
 
+        if (!isset($menu_item)) {
+            throw new BadRequestException('this menu doesnt exits');
+        }
+
+        $data = [
+            'title' => '',
+            'parent_id' => $parent_id,
+        ];
+
+        $this->model->save($data);
+        
+        $inserted_id = $this->model->insertID();
+        $created_menu = $this->model->find($inserted_id);
+
+        return response()->setJSON([
+            'success'   => true,
+            'menu_item' => $created_menu,
+            'message'   => 'item menu has been created',
+        ]);
+    }
+
+    public function removeMenu(int $menu_id)
+    {
         if (!isset($menu_id)) {
             throw new BadRequestException('menu_id must been integer');
         }
@@ -40,6 +65,25 @@ class MenuController extends AdminController
         return $this->response->setJSON([
             'success' => true,
             'message' => "menu_id: {$menu_id} removed",
+        ]);
+    }
+
+    public function editMenu(int $menu_id)
+    {
+        $menu_item = $this->model->find($menu_id);
+        $new_title = $this->request->getVar('title');
+
+        if (!isset($menu_item)) {
+            throw new BadRequestException('this menu doesnt exits');
+        }
+
+        $menu_item['title'] = $new_title;
+
+        $this->model->save($menu_item);
+        
+        return response()->setJSON([
+            'success' => true,
+            'message' => 'title updated',
         ]);
     }
 
