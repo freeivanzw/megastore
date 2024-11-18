@@ -4,14 +4,17 @@ namespace App\Controllers\Admin;
 
 use CodeIgniter\HTTP\Exceptions\BadRequestException;
 use \App\Models\MenuItemsModel;
+use App\Models\SiteLinksModel;
 
 class MenuController extends AdminController
 {
     private MenuItemsModel $model;
+    private SiteLinksModel $links;
 
     public function __construct()
     {
         $this->model = new MenuItemsModel();
+        $this->links = new SiteLinksModel();
     }
 
     public function index()
@@ -27,7 +30,7 @@ class MenuController extends AdminController
             ->render();
     }
 
-    public function createSubmenu(int $parent_id)
+    public function createSubmenu(int $parent_id) 
     {
         $menu_item = $this->model->find($parent_id);
 
@@ -36,7 +39,7 @@ class MenuController extends AdminController
         }
 
         $data = [
-            'title' => '',
+            'title'     => '',
             'parent_id' => $parent_id,
         ];
 
@@ -44,6 +47,12 @@ class MenuController extends AdminController
         
         $inserted_id = $this->model->insertID();
         $created_menu = $this->model->find($inserted_id);
+
+        $this->links->save([
+            'url'          => $inserted_id,
+            'type'         => 'menu',
+            'menu_item_id' => $inserted_id,
+        ]);
 
         return response()->setJSON([
             'success'   => true,
@@ -58,9 +67,11 @@ class MenuController extends AdminController
             throw new BadRequestException('menu_id must been integer');
         }
 
-        if (!$this->model->delete($menu_id)) {
+        if (!$this->model->delete($menu_id) ) {
             throw new BadRequestException('this menu doesnt exits');
         }
+
+        $this->links->where('menu_item_id', $menu_id)->delete();
 
         return $this->response->setJSON([
             'success' => true,
@@ -80,6 +91,11 @@ class MenuController extends AdminController
         $menu_item['title'] = $new_title;
 
         $this->model->save($menu_item);
+
+        $link = $this->links->where('menu_item_id', $menu_id)->find()[0];
+        $link['url'] = generateSlug($new_title);
+        $this->links->save($link);
+
         
         return response()->setJSON([
             'success' => true,

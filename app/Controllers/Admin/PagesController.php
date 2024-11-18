@@ -7,6 +7,11 @@ class PagesController extends AdminController
     public function index()
     {
         
-        return $this->view->setLayout('Admin/Default')->render();
-    }    
+        return $this->view->render();
+    }
+
+    public function renderPage()
+    {
+        
+    }
 }

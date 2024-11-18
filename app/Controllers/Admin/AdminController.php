@@ -56,5 +56,7 @@ abstract class AdminController extends Controller
 
         $this->session = \Config\Services::session();
         $this->view = new \App\Libraries\CustomRender();
+
+        $this->view->setLayout('Admin/Default');
     }
 }

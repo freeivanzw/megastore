@@ -25,6 +25,8 @@ $routes->group('admin', static function ($routes) {
             $routes->get('logout', 'Admin\AuthController::logout');
             $routes->post('register', 'Admin\AuthController::register');        
         });
+
+        $routes->get('(:any)', 'Admin\PagesController::renderPage');
     });
 
     

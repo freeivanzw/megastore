@@ -4,7 +4,7 @@ namespace App\Libraries;
 
 class CustomRender {
     private $view;
-    private $layout = 'Admin/Default';
+    private $layout;
     private $components = [];
 
     public function __construct()
