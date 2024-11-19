@@ -22,10 +22,16 @@ class PagesController extends FrontController
         }
     
         if ($linkInfo['type'] === 'menu') {
+            $this->view->setLayout('Front/Default');
+
+            $menu_model = new \App\Models\MenuItemsModel();
+
+            $this->view->addGlobalData('top_menu', $menu_model->getTopMenu());
+
             $componentsModel = new \App\Models\ComponentsModel();
             $components = $componentsModel->getByMenuId($linkInfo['menu_item_id']);
             
-            dd($components);
+            return $this->view->render();
         }
     }
 }

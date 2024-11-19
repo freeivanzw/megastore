@@ -34,3 +34,7 @@ body {
 .product_details-image:nth-child(1) img {
     height: 400px !important;
 }
+
+.top_menu a {
+    color: #ffffff;
+}

@@ -42,6 +42,7 @@ abstract class FrontController extends Controller
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
     protected $session;
+    protected $view;
 
     /**
      * @return void
@@ -54,5 +55,6 @@ abstract class FrontController extends Controller
         // Preload any models, libraries, etc, here.
 
         $this->session = \Config\Services::session();
+        $this->view = new \App\Libraries\CustomRender();
     }
 }

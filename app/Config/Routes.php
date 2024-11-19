@@ -11,6 +11,11 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Front\Home::index');
 
 $routes->group('admin', static function ($routes) {
+    $routes->group('auth', static function ($routes) {
+        $routes->get('login', 'Admin\AuthController::login');
+        $routes->post('login', 'Admin\AuthController::enter');
+    });
+    
     $routes->group('/', ['filter' => 'adminAuth'], static function ($routes) {
         $routes->get('/', 'Admin\PagesController::index');
 
@@ -30,10 +35,7 @@ $routes->group('admin', static function ($routes) {
     });
 
     
-    $routes->group('auth', static function ($routes) {
-        $routes->get('login', 'Admin\AuthController::login');
-        $routes->post('login', 'Admin\AuthController::enter');
-    });
+   
 });
 
 $routes->get('(:any)', 'Front\PagesController::renderPage');
