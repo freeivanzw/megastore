@@ -1,0 +1,3 @@
+<section>
+    компонент <?= $title ;?>
+</section>
