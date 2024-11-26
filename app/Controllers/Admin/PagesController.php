@@ -40,7 +40,6 @@ class PagesController extends AdminController
             foreach ($components as $component) {
                 $controllerClass = "\\App\\Controllers\\Admin\\" . $component['type'] . 'Controller';
 
-
                 if (class_exists($controllerClass)) {
                     $controller_component = new $controllerClass();
 

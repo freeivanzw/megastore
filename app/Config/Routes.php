@@ -26,6 +26,10 @@ $routes->group('admin', static function ($routes) {
             $routes->delete('(:num)', 'Admin\MenuController::removeMenu/$1');
         });
 
+        $routes->group('component', static function ($routes) {
+            $routes->post('/', 'Admin\ComponentsController::create');
+        });
+
         $routes->group('auth', static function ($routes) {
             $routes->get('logout', 'Admin\AuthController::logout');
             $routes->post('register', 'Admin\AuthController::register');        
