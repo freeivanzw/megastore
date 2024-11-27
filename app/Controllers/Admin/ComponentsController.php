@@ -31,13 +31,31 @@ class ComponentsController extends AdminController
             'title' => '',
             'menu_item_id' => $menu_id,
             'number_order' => null,
-            'type' => ucfirst($component_name),
+            'type' => $component_name,
         ]);
 
         $component_id = $this->model->getInsertID();
         
         $component_model = new $component_class();
         $component_model->addComponent($component_id);
+        
+        return redirect()->back();
+    }
+
+    public function remove()
+    {
+        $component_type = $this->request->getGet('type');
+        $component_id = $this->request->getGet('id');
+
+        $component_class = "\\App\\Models\\" . ucfirst($component_type) . 'ComponentModel';
+        
+        if (!class_exists($component_class)) {
+            throw new PageNotFoundException("not found this class: {$component_type}ComponentModel");
+        }
+
+        $component_model = new $component_class();
+        $component_model->where('component_id', $component_id)->delete();
+        $this->model->delete($component_id);
         
         return redirect()->back();
     }

@@ -43,7 +43,7 @@ class PagesController extends AdminController
                 if (class_exists($controllerClass)) {
                     $controller_component = new $controllerClass();
 
-                    $this->view->addComponent($controller_component->preview($component), $component);
+                    $this->view->addComponent('Admin/Components/ComponentPreview', $component);
                 }
             }
             

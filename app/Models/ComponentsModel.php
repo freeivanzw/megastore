@@ -20,7 +20,7 @@ class ComponentsModel extends Model
         $components =  $this->select('id, title, type, number_order')
                             ->where('menu_item_id', $menu_id)
                             ->findAll();
-
+        
         return $components;
     }
 
@@ -43,7 +43,7 @@ class ComponentsModel extends Model
 
             $components[$key]['data'] = $results[0];
         }
-
+        
         return $components;
     }
 }

@@ -28,6 +28,7 @@ $routes->group('admin', static function ($routes) {
 
         $routes->group('component', static function ($routes) {
             $routes->post('/', 'Admin\ComponentsController::create');
+            $routes->get('/', 'Admin\ComponentsController::remove');
         });
 
         $routes->group('auth', static function ($routes) {
