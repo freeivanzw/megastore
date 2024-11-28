@@ -15,6 +15,21 @@ class ComponentsController extends AdminController
         $this->model = new ComponentsModel();
     }
 
+    public function index(int $component_id)
+    {
+        $component = $this->model->find($component_id);
+
+        $component_class = "\\App\\Models\\" . ucfirst($component['type']) . 'ComponentModel';
+        $componentModel = new $component_class();
+        
+        $view_component_path = "Admin/Components/" . ucfirst($component['type']) . 'Details';
+        $component_data = $componentModel->where('component_id', $component_id)->find()[0];
+
+        return $this->view
+                    ->addComponent($view_component_path, $component_data)
+                    ->render();
+    }
+
     public function create()
     {
 
@@ -59,5 +74,4 @@ class ComponentsController extends AdminController
         
         return redirect()->back();
     }
-
 }

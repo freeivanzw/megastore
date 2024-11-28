@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use \App\Libraries\CustomRender;
 
 /**
  * Class BaseController
@@ -42,7 +43,7 @@ abstract class AdminController extends Controller
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
     protected $session;
-    protected $view;
+    protected CustomRender $view;
 
     /**
      * @return void
@@ -55,7 +56,7 @@ abstract class AdminController extends Controller
         // Preload any models, libraries, etc, here.
 
         $this->session = \Config\Services::session();
-        $this->view = new \App\Libraries\CustomRender();
+        $this->view = new CustomRender();
 
         $this->view->setLayout('Admin/Default');
     }
