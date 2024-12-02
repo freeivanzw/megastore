@@ -2,7 +2,8 @@
 
 namespace App\Controllers\Admin;
 
-class ArticleController extends AdminController
+class ArticleController extends AdminController 
 {
+ 
 
 }

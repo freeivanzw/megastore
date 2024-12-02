@@ -20,21 +20,31 @@ class ComponentsController extends AdminController
         $component = $this->model->find($component_id);
 
         $component_class = "\\App\\Models\\" . ucfirst($component['type']) . 'ComponentModel';
-        $componentModel = new $component_class();
+        $component_model = new $component_class();
         
         $view_component_path = "Admin/Components/" . ucfirst($component['type']) . 'Details';
-        $component_data = $componentModel->where('component_id', $component_id)->find()[0];
+        $component_data = $component_model->where('component_id', $component_id)->find()[0];        
+
+        $view_data = [
+            ...$component_data,
+            'id' => $component['id'],
+            'component_type' => $component['type'],
+            'component_title' => $component['title'],
+        ];
 
         return $this->view
-                    ->addComponent($view_component_path, $component_data)
+                    ->addComponent($view_component_path, $view_data)
                     ->render();
     }
 
     public function create()
     {
-
         $component_name = 'article';
-        $menu_id = 142;
+        $menu_id = $this->request->getPost('menu_id');
+
+        if (!isset($menu_id)) {
+            throw new PageNotFoundException("need menu id");
+        }
 
         $component_class = "\\App\\Models\\" . ucfirst($component_name) . 'ComponentModel';
         
@@ -52,8 +62,35 @@ class ComponentsController extends AdminController
         $component_id = $this->model->getInsertID();
         
         $component_model = new $component_class();
-        $component_model->addComponent($component_id);
+        $component_model->add($component_id);
         
+        return redirect()->back();
+    }
+
+    public function edit()
+    {
+        $component_id = $this->request->getPost('component_id');
+        $component_type = $this->request->getPost('component_type');
+        $component_title = $this->request->getPost('title');
+        $data = $this->request->getPost('data');
+
+        if (!isset($component_id) || !isset($component_type)) {
+            throw new PageNotFoundException("");
+        }
+
+        $component_class = "\\App\\Models\\" . ucfirst($component_type) . 'ComponentModel';
+         
+        if (!class_exists($component_class)) {
+            throw new PageNotFoundException("not found this class: {$component_class}ComponentModel");
+        }
+
+        $component = $this->model->find($component_id);
+        $component['title'] = $component_title;
+        $this->model->update($component_id, $component);
+
+        $component_model = new $component_class();
+        $component_model->edit($component_id, $data);
+
         return redirect()->back();
     }
 

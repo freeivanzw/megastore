@@ -28,6 +28,7 @@ $routes->group('admin', static function ($routes) {
 
         $routes->group('component', static function ($routes) {
             $routes->post('/', 'Admin\ComponentsController::create');
+            $routes->post('edit', 'Admin\ComponentsController::edit');
             $routes->get('/', 'Admin\ComponentsController::remove');
             $routes->get('(:num)', 'Admin\ComponentsController::index/$1');
         });
@@ -35,6 +36,10 @@ $routes->group('admin', static function ($routes) {
         $routes->group('auth', static function ($routes) {
             $routes->get('logout', 'Admin\AuthController::logout');
             $routes->post('register', 'Admin\AuthController::register');        
+        });
+
+        $routes->group('article', static function ($routes) {
+
         });
 
         $routes->get('(:any)', 'Admin\PagesController::renderPage');
