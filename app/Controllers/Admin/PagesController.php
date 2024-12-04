@@ -27,18 +27,22 @@ class PagesController extends AdminController
         }
     
         if ($linkInfo['type'] === 'menu') {
-            $this->view->setLayout('Admin/Default');
+            $menu_model = new \App\Models\MenuItemsModel();
+            $components_controller = new \App\Controllers\Admin\ComponentsController();
+
+            $menu_details_data = [
+                'menu_data'       => $menu_model->find($linkInfo['menu_item_id']),
+                'components_list' => $components_controller->getComponentsList(),
+            ];
+
+            $this->view->setLayout('Admin/Default')
+                       ->addComponent('Admin/Components/MenuDetails', $menu_details_data);
 
             $componentsModel = new \App\Models\ComponentsModel();
             $components = $componentsModel->getByMenuId($linkInfo['menu_item_id']);
 
-            $menu_model = new \App\Models\MenuItemsModel();
-            $menu_data = $menu_model->find($linkInfo['menu_item_id']);
-
-            $this->view->addComponent('Admin/Components/MenuDetails', $menu_data);
-
             foreach ($components as $component) {
-                $controllerClass = "\\App\\Controllers\\Admin\\" . $component['type'] . 'Controller';
+                $controllerClass = "\\App\\Controllers\\Admin\\" . $component['type'] . 'ComponentController';
 
                 if (class_exists($controllerClass)) {
                     $controller_component = new $controllerClass();

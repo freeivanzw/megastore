@@ -19,48 +19,54 @@ class ComponentsController extends AdminController
     {
         $component = $this->model->find($component_id);
 
-        $component_class = "\\App\\Models\\" . ucfirst($component['type']) . 'ComponentModel';
+        $component_class = "\\App\\Controllers\\Admin\\" . ucfirst($component['type']) . 'ComponentController';
         $component_model = new $component_class();
-        
-        $view_component_path = "Admin/Components/" . ucfirst($component['type']) . 'Details';
-        $component_data = $component_model->where('component_id', $component_id)->find()[0];        
 
+        $component_data = $component_model->get($component_id);
+        
         $view_data = [
             ...$component_data,
-            'id' => $component['id'],
-            'component_type' => $component['type'],
+            'id'              => $component['id'],
+            'component_type'  => $component['type'],
             'component_title' => $component['title'],
         ];
+
+        $view_component_path = "Admin/Components/" . ucfirst($component['type']) . 'Details';
 
         return $this->view
                     ->addComponent($view_component_path, $view_data)
                     ->render();
     }
 
+    public function getComponentsList(): array
+    {
+        return $this->components;
+    }
+
     public function create()
     {
-        $component_name = 'article';
-        $menu_id = $this->request->getPost('menu_id');
+        $component_name = $this->request->getPost('component');
+        $menu_id        = $this->request->getPost('menu_id');
 
-        if (!isset($menu_id)) {
-            throw new PageNotFoundException("need menu id");
+        if ($menu_id === '' || $component_name === '') {
+            throw new PageNotFoundException("data not correct");
         }
 
-        $component_class = "\\App\\Models\\" . ucfirst($component_name) . 'ComponentModel';
-        
+        $component_class = "\\App\\Controllers\\Admin\\" . ucfirst($component_name) . 'ComponentController';
+
         if (!class_exists($component_class)) {
-            throw new PageNotFoundException("not found this class: {$component_name}ComponentModel");
+            throw new PageNotFoundException("not found this class: {$component_class}");
         }
 
         $this->model->save([
-            'title' => '',
+            'title'        => '',
             'menu_item_id' => $menu_id,
             'number_order' => null,
-            'type' => $component_name,
+            'type'         => $component_name,
         ]);
 
         $component_id = $this->model->getInsertID();
-        
+
         $component_model = new $component_class();
         $component_model->add($component_id);
         
@@ -78,7 +84,7 @@ class ComponentsController extends AdminController
             throw new PageNotFoundException("");
         }
 
-        $component_class = "\\App\\Models\\" . ucfirst($component_type) . 'ComponentModel';
+        $component_class = "\\App\\Controllers\\Admin\\" . ucfirst($component_type) . 'ComponentController';
          
         if (!class_exists($component_class)) {
             throw new PageNotFoundException("not found this class: {$component_class}ComponentModel");
@@ -99,14 +105,15 @@ class ComponentsController extends AdminController
         $component_type = $this->request->getGet('type');
         $component_id = $this->request->getGet('id');
 
-        $component_class = "\\App\\Models\\" . ucfirst($component_type) . 'ComponentModel';
-        
+        $component_class = "\\App\\Controllers\\Admin\\" . ucfirst($component_type) . 'ComponentController';
+
         if (!class_exists($component_class)) {
             throw new PageNotFoundException("not found this class: {$component_type}ComponentModel");
         }
-
+        
         $component_model = new $component_class();
-        $component_model->where('component_id', $component_id)->delete();
+        $component_model->remove($component_id);
+
         $this->model->delete($component_id);
         
         return redirect()->back();
