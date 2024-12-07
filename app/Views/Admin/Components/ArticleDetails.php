@@ -22,3 +22,14 @@
         <button type="submit" class="btn btn-primary">Зберегти</button>
     </form>
 </section>
+<script src="<?=base_url('extra-assets/ckeditor/ckeditor.js');?>"></script>
+
+<script>
+    // var elFinderPath = '/extra-assets/elFinder/elfinder.php?integration=ckeditor&uid=12';
+    var elFinderPath = '/admin/filemanager/?integration=ckeditor';
+    CKEDITOR.replace('editor1', {
+        filebrowserBrowseUrl: elFinderPath,
+        filebrowserImageBrowseUrl: elFinderPath + '&type=image',
+        removeDialogTabs: 'link:upload;image:upload',
+    });
+</script>

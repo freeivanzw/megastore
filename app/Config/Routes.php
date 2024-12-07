@@ -19,6 +19,12 @@ $routes->group('admin', static function ($routes) {
     $routes->group('/', ['filter' => 'adminAuth'], static function ($routes) {
         $routes->get('/', 'Admin\PagesController::index');
 
+        $routes->group('filemanager', static function ($routes) {
+            $routes->get('/', 'Admin\FilemanagerController::index');
+            $routes->get('connector', 'Admin\FilemanagerController::connector');
+            $routes->post('connector', 'Admin\FilemanagerController::connector');
+        });
+
         $routes->group('menu', static function ($routes) {
             $routes->get('/', 'Admin\MenuController::index');
             $routes->post('(:num)', 'Admin\MenuController::createSubmenu/$1');

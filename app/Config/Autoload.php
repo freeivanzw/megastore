@@ -60,7 +60,32 @@ class Autoload extends AutoloadConfig
      *
      * @var array<string, string>
      */
-    public $classmap = [];
+    public $classmap = [
+        // 'elfinder' =>  APPPATH . 'ThirdParty/elfinder/autoload.php',
+        'elFinder' => APPPATH . 'ThirdParty/elfinder/elFinder.class.php',
+        'elFinderConnector' => APPPATH . 'ThirdParty/elfinder/elFinderConnector.class.php',
+        'elFinderEditor' => APPPATH . 'ThirdParty/elfinder/editors/editor.php',
+        'elFinderLibGdBmp' => APPPATH . 'ThirdParty/elfinder/libs/GdBmp.php',
+        'elFinderPlugin' => APPPATH . 'ThirdParty/elfinder/elFinderPlugin.php',
+        'elFinderPluginAutoResize' => APPPATH . 'ThirdParty/elfinder/plugins/AutoResize/plugin.php',
+        'elFinderPluginAutoRotate' => APPPATH . 'ThirdParty/elfinder/plugins/AutoRotate/plugin.php',
+        'elFinderPluginNormalizer' => APPPATH . 'ThirdParty/elfinder/plugins/Normalizer/plugin.php',
+        'elFinderPluginSanitizer' => APPPATH . 'ThirdParty/elfinder/plugins/Sanitizer/plugin.php',
+        'elFinderPluginWatermark' => APPPATH . 'ThirdParty/elfinder/plugins/Watermark/plugin.php',
+        'elFinderSession' => APPPATH . 'ThirdParty/elfinder/elFinderSession.php',
+        'elFinderSessionInterface' => APPPATH . 'ThirdParty/elfinder/elFinderSessionInterface.php',
+        'elFinderVolumeDriver' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeDriver.class.php',
+        'elFinderVolumeDropbox2' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeDropbox2.class.php',
+        'elFinderVolumeFTP' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeFTP.class.php',
+        'elFinderVolumeFlysystemGoogleDriveCache' => APPPATH . 'ThirdParty/elfinder/elFinderFlysystemGoogleDriveNetmount.php',
+        'elFinderVolumeFlysystemGoogleDriveNetmount' => APPPATH . 'ThirdParty/elfinder/elFinderFlysystemGoogleDriveNetmount.php',
+        'elFinderVolumeGoogleDrive' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeGoogleDrive.class.php',
+        'elFinderVolumeGroup' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeGroup.class.php',
+        'elFinderVolumeLocalFileSystem' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeLocalFileSystem.class.php',
+        'elFinderVolumeMySQL' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeMySQL.class.php',
+        'elFinderVolumeSFTPphpseclib' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeSFTPphpseclib.class.php',
+        'elFinderVolumeTrash' => APPPATH . 'ThirdParty/elfinder/elFinderVolumeTrash.class.php',
+    ];
 
     /**
      * -------------------------------------------------------------------

@@ -97,7 +97,7 @@ class ComponentsController extends AdminController
         $component_model = new $component_class();
         $component_model->edit($component_id, $data);
 
-        return redirect()->back();
+        return redirect()->to('admin/component/' . $component_id);
     }
 
     public function remove()
