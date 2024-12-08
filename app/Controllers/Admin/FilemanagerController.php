@@ -7,7 +7,7 @@ use App\Controllers\Admin\AdminController;
 
 class FilemanagerController extends AdminController
 {
-    public function interface()
+    public function index()
     {
         return view('Admin/Components/elfinder');
     }
