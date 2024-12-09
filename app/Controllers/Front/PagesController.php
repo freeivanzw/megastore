@@ -30,6 +30,17 @@ class PagesController extends FrontController
 
             $componentsModel = new \App\Models\ComponentsModel();
             $components = $componentsModel->getByMenuId($linkInfo['menu_item_id']);
+
+            foreach ($components as $component) {
+                $controllerClass = "\\App\\Controllers\\Front\\" . $component['type'] . 'Controller';
+
+                if (class_exists($controllerClass)) {
+                    $controller_component = new $controllerClass();
+                    $data = $controller_component->publicData($component['id']);
+
+                    $this->view->addComponent('Front/Components/' . $component['type'], $data);
+                }
+            }
             
             return $this->view->render();
         }

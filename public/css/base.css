@@ -8,6 +8,12 @@ body {
     height: 100%;
 }
 
+article img {
+    display: block;
+    max-width: 100% !important;
+    height: auto !important;
+}
+
 .content {
     flex: 1 1 auto
 }
