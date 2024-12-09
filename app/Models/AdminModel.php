@@ -27,7 +27,12 @@ class AdminModel extends Model
         'password'     => 'required|max_length[255]|min_length[5]',
     ];
 
-    protected function hashPassword(array $data)
+    /**
+     * Hashing password method after creatign administrator
+     * @param array $data
+     * @return array 
+     */
+    protected function hashPassword(array $data): array
     {
         if (! isset($data['data']['password'])) {
             return $data;

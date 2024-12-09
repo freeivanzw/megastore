@@ -15,7 +15,12 @@ class ComponentsController extends AdminController
         $this->model = new ComponentsModel();
     }
 
-    public function index(int $component_id)
+    /**
+     * Get comopnent details admin page
+     * @param int $component_id
+     * @return string
+     */
+    public function index(int $component_id): string
     {
         $component = $this->model->find($component_id);
 
@@ -38,11 +43,18 @@ class ComponentsController extends AdminController
                     ->render();
     }
 
+    /**
+     * Method use for get all components names
+     * @return array
+     */
     public function getComponentsList(): array
     {
         return $this->components;
     }
 
+    /**
+     * Create new component
+     */
     public function create()
     {
         $component_name = $this->request->getPost('component');
@@ -73,6 +85,9 @@ class ComponentsController extends AdminController
         return redirect()->back();
     }
 
+    /**
+     * Edit component
+     */
     public function edit()
     {
         $component_id = $this->request->getPost('component_id');
@@ -100,6 +115,9 @@ class ComponentsController extends AdminController
         return redirect()->to('admin/component/' . $component_id);
     }
 
+    /**
+     * Remove component
+     */
     public function remove()
     {
         $component_type = $this->request->getGet('type');

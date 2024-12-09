@@ -17,6 +17,9 @@ class MenuController extends AdminController
         $this->links = new SiteLinksModel();
     }
 
+    /**
+     * Get menu view
+     */
     public function index()
     {
         $menu_items = $this->model->getTopMenu();
@@ -30,6 +33,9 @@ class MenuController extends AdminController
             ->render();
     }
 
+    /**
+     * @param int @parent_id
+     */
     public function createSubmenu(int $parent_id) 
     {
         $menu_item = $this->model->find($parent_id);
@@ -61,6 +67,9 @@ class MenuController extends AdminController
         ]);
     }
 
+    /**
+     * @param int @menu_id
+     */
     public function removeMenu(int $menu_id)
     {
         if (!isset($menu_id)) {
@@ -79,6 +88,9 @@ class MenuController extends AdminController
         ]);
     }
 
+    /**
+     * @param int @menu_id
+     */
     public function editMenu(int $menu_id)
     {
         $menu_item = $this->model->find($menu_id);

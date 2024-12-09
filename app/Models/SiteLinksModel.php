@@ -11,7 +11,13 @@ class SiteLinksModel extends Model
 
     protected $allowedFields = ['url', 'type', 'menu_item_id', 'product_id'];
 
-    public function getlinkInfo($url, $type = 'front')
+    /**
+     * Get information from url
+     * @param string $url
+     * @param string $type
+     * @return array
+     */
+    public function getlinkInfo(string $url, $type = 'front'): array
     {
         $urlSegments = explode('/', $url);
 

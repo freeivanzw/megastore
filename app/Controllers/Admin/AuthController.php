@@ -15,6 +15,10 @@ class AuthController extends AdminController
         $this->adminModel = new AdminModel();
     }
 
+    /**
+     * Get login view
+     * @return string 
+     */
     public function login(): string
     {
         
@@ -24,6 +28,9 @@ class AuthController extends AdminController
             ->render();
     }
 
+    /**
+     * Auntification administrator account
+     */
     public function enter() {
         $data = $this->request->getPost();
         
@@ -46,6 +53,9 @@ class AuthController extends AdminController
         }
     }
 
+    /**
+     * Logout admin
+     */
     public function logout()
     {
         $this->session->remove('admin_id');
@@ -53,6 +63,10 @@ class AuthController extends AdminController
         return redirect()->to('/');
     }
 
+    /**
+     * Create new administrator
+     * @return bool
+     */
     public function register(): bool
     {
         $data = $this->request->getPost();
