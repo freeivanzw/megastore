@@ -19,12 +19,16 @@ class SiteLinksModel extends Model
      */
     public function getlinkInfo(string $url, $type = 'front'): array
     {
-        $urlSegments = explode('/', $url);
+        $url_segments = explode('/', $url);
 
         if ($type === 'admin') {
-            return $this->where('url', $urlSegments[1])->first();
+            $admin_url = $url_segments[1] ?? 'main-page';
+
+            return $this->where('url', $admin_url)->first();
         }
+
+        $frontUrl = $url_segments[0] !== '' ? $url_segments[0] : 'main-page';
         
-        return $this->where('url', $urlSegments[0])->first();
+        return $this->where('url', $frontUrl)->first();
     }
 }

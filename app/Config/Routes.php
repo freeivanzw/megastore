@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Front\Home::index');
+$routes->get('/', 'Front\PagesController::renderPage');
 
 $routes->group('admin', static function ($routes) {
     $routes->group('auth', static function ($routes) {
@@ -17,7 +17,7 @@ $routes->group('admin', static function ($routes) {
     });
     
     $routes->group('/', ['filter' => 'adminAuth'], static function ($routes) {
-        $routes->get('/', 'Admin\PagesController::index');
+        $routes->get('/', 'Admin\PagesController::renderPage');
 
         $routes->group('filemanager', static function ($routes) {
             $routes->get('/', 'Admin\FilemanagerController::index');

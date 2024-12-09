@@ -1,5 +1,5 @@
 <section>
-    <h1>Компоненти меню '<?= $menu_data['title']; ?>'</h1>
+    <h1>Компоненти '<?= $menu_data['title']; ?>'</h1>
     <br>
     <form action="<?=base_url('admin/component');?>" method="post">
         <input type="hidden" name="menu_id" value=<?= $menu_data['id']; ?>>

@@ -8,7 +8,7 @@ class PagesController extends AdminController
 {
     public function index()
     {
-        
+     
         return $this->view->render();
     }
 
