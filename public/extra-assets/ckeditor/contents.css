@@ -18,10 +18,15 @@ body
 	margin: 20px;
 }
 
+html {
+	height: 100%;
+}
+
 .cke_editable
 {
 	font-size: 13px;
 	line-height: 1.6em;
+	height: 100%;
 }
 
 blockquote

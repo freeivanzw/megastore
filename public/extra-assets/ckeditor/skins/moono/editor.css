@@ -1392,3 +1392,11 @@ legend.cke_voice_label {
 .cke_ltr .cke_button__undo_icon {
     background: url(icons.png) no-repeat 0 -2592px !important;
 }
+
+.cke_reset html {
+    height: 100%;
+}
+
+.cke_reset body {
+    height: 100%;
+}
