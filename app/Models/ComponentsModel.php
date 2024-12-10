@@ -19,6 +19,7 @@ class ComponentsModel extends Model
     {
         $components =  $this->select('id, title, type, number_order')
                             ->where('menu_item_id', $menu_id)
+                            ->orderBy('number_order')
                             ->findAll();
         
         return $components;

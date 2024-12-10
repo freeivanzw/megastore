@@ -58,6 +58,7 @@ class ComponentsController extends AdminController
     public function create()
     {
         $component_name = $this->request->getPost('component');
+        $component_idx  = $this->request->getPost('component_idx');
         $menu_id        = $this->request->getPost('menu_id');
 
         if ($menu_id === '' || $component_name === '') {
@@ -73,8 +74,8 @@ class ComponentsController extends AdminController
         $this->model->save([
             'title'        => '',
             'menu_item_id' => $menu_id,
-            'number_order' => null,
             'type'         => $component_name,
+            'number_order' => $component_idx,
         ]);
 
         $component_id = $this->model->getInsertID();
@@ -113,6 +114,29 @@ class ComponentsController extends AdminController
         $component_model->edit($component_id, $data);
 
         return redirect()->to('admin/component/' . $component_id);
+    }
+
+    /**
+     * Method change position components in list
+     */
+    public function changeOrder()
+    {
+        $component_id = (int) $this->request->getGet('id');
+        $new_order = (int) $this->request->getGet('order');
+
+        $current_component = $this->model->find($component_id);
+        
+        $second_component = $this->model->where('menu_item_id', $current_component['menu_item_id'])
+                                        ->where('number_order', $new_order)
+                                        ->find()[0];
+        
+        $second_component['number_order'] = $current_component['number_order']; 
+        $current_component['number_order'] = $new_order;
+
+        $this->model->save($current_component);
+        $this->model->save($second_component);
+
+        return redirect()->back();
     }
 
     /**

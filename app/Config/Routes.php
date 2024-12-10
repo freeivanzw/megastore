@@ -35,7 +35,8 @@ $routes->group('admin', static function ($routes) {
         $routes->group('component', static function ($routes) {
             $routes->post('/', 'Admin\ComponentsController::create');
             $routes->post('edit', 'Admin\ComponentsController::edit');
-            $routes->get('/', 'Admin\ComponentsController::remove');
+            $routes->get('order', 'Admin\ComponentsController::changeOrder');
+            $routes->get('remove', 'Admin\ComponentsController::remove');
             $routes->get('(:num)', 'Admin\ComponentsController::index/$1');
         });
 

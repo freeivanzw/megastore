@@ -35,17 +35,21 @@ class PagesController extends AdminController
                 'components_list' => $components_controller->getComponentsList(),
             ];
 
-            $this->view->setLayout('Admin/Default')
-                       ->addComponent('Admin/Components/MenuDetails', $menu_details_data);
-
             $componentsModel = new \App\Models\ComponentsModel();
             $components = $componentsModel->getByMenuId($linkInfo['menu_item_id']);
 
-            foreach ($components as $component) {
+            $menu_details_data['component_idx'] = count($components);
+
+            $this->view->setLayout('Admin/Default')
+                       ->addComponent('Admin/Components/MenuDetails', $menu_details_data);
+
+            foreach ($components as $key => $component) {
                 $controllerClass = "\\App\\Controllers\\Admin\\" . $component['type'] . 'ComponentController';
 
                 if (class_exists($controllerClass)) {
                     $controller_component = new $controllerClass();
+
+                    $component['last_order'] = (count($components) - 1) === $key;
 
                     $this->view->addComponent('Admin/Components/ComponentPreview', $component);
                 }
