@@ -8,7 +8,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class ComponentsController extends AdminController
 {   
     private ComponentsModel $model;
-    private $components = ['article'];
+    private $components = ['article', 'banner'];
 
     public function __construct()
     {

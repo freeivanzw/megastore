@@ -44,3 +44,50 @@ article img {
 .top_menu a {
     color: #ffffff;
 }
+
+.top_menu > ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.top_menu > ul li {
+    list-style: none;
+}
+
+.top_menu > ul > li {
+    list-style: none;
+    margin: 0 10px;
+    position: relative;
+}
+
+.top_menu > ul > li a {
+    text-decoration: none;
+}
+
+.top_menu > ul > li a:hover {
+    text-decoration: underline;
+}
+
+.top_menu > ul > li > ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 200px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 10px;
+    background-color: rgb(67, 67, 67);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.top_menu > ul > li:hover > ul,
+.top_menu > ul > li > ul:hover {
+    opacity: 1;
+    visibility: visible;
+}
