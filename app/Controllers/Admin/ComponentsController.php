@@ -25,7 +25,7 @@ class ComponentsController extends AdminController
         $component = $this->model->find($component_id);
 
         $component_class = "\\App\\Controllers\\Admin\\" . ucfirst($component['type']) . 'ComponentController';
-        $component_model = new $component_class($this->request);
+        $component_model = new $component_class();
 
         $component_data = $component_model->get($component_id);
         
@@ -80,7 +80,7 @@ class ComponentsController extends AdminController
 
         $component_id = $this->model->getInsertID();
 
-        $component_model = new $component_class($this->request);
+        $component_model = new $component_class();
         $component_model->add($component_id);
         
         return redirect()->back();
@@ -94,7 +94,6 @@ class ComponentsController extends AdminController
         $component_id = $this->request->getPost('component_id');
         $component_type = $this->request->getPost('component_type');
         $component_title = $this->request->getPost('title');
-        $data = $this->request->getPost('data');
 
         if (!isset($component_id) || !isset($component_type)) {
             throw new PageNotFoundException("");
@@ -110,8 +109,8 @@ class ComponentsController extends AdminController
         $component['title'] = $component_title;
         $this->model->update($component_id, $component);
 
-        $component_model = new $component_class($this->request);
-        $component_model->edit($component_id, $data);
+        $component_model = new $component_class();
+        $component_model->edit($component_id, $this->request);
 
         return redirect()->to('admin/component/' . $component_id);
     }

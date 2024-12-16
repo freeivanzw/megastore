@@ -49,6 +49,10 @@ $routes->group('admin', static function ($routes) {
 
         });
 
+        $routes->group('banner', static function ($routes) {
+            $routes->get('image/remove/(:num)', 'Admin\BannerComponentController::removeImage/$1');
+        });
+
         $routes->get('(:any)', 'Admin\PagesController::renderPage');
     });
 

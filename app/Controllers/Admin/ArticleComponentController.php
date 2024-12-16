@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\ArticleComponentModel;
 use App\Controllers\Admin\IComponent;
+use CodeIgniter\HTTP\IncomingRequest;
 
 class ArticleComponentController extends AdminController implements IComponent
 {
@@ -43,10 +44,11 @@ class ArticleComponentController extends AdminController implements IComponent
     /**
      * Change component data 
      * @param int $component_id 
-     * @param array $data
+     * @param IncomingRequest $request
      */
-    public function edit(int $component_id, array $data)
+    public function edit(int $component_id, IncomingRequest $request)
     {
+        $data = $request->getPost('data');
         $component = $this->model->where('component_id', $component_id)
                                  ->find()[0];
 

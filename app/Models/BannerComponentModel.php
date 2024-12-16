@@ -28,14 +28,14 @@ class BannerComponentModel extends Model
 
         $file_name = $image->getName();
 
-        $dir_path = FCPATH . 'uploads/slide/' . $component['id'];
+        $dir_path = FCPATH . 'uploads/slide/' . $component['component_id'];
 
         if (!file_exists($dir_path)) {
             mkdir($dir_path);
         }
 
         $image->move($dir_path, $file_name, true);
-        $image_path = 'uploads/slide/' . $component['id'] . '/' . $file_name;
+        $image_path = 'uploads/slide/' . $component['component_id'] . '/' . $file_name;
 
         $this->update($component['id'], [
             'image' => $image_path,
@@ -43,4 +43,29 @@ class BannerComponentModel extends Model
 
         return $image_path;
     }
+
+    public function deleteImage(int $component_id)
+    {
+        $dir_path = FCPATH . 'uploads/slide/' . $component_id;
+
+        if (!file_exists($dir_path)) {
+            throw new Exception('directory not found');
+        }
+
+        $component = $this->where('component_id', $component_id)
+                          ->find()[0];   
+
+        $file_path = FCPATH . $component['image'];
+
+        if (!file_exists($file_path)) {
+            throw new Exception('file not found');
+        }
+
+        unlink($file_path);
+        rmdir($dir_path);
+
+        $component['image'] = '';
+        $this->save($component);
+    }
+    
 }

@@ -16,7 +16,7 @@
             <?php if ($image): ?>
                 <div class="selected_photo">
                     <img src="<?=base_url($image);?>" alt="banner Image" class="img-thumbnail mt-2" width="150">
-                    <a href="<?=base_url('admin/banner/remove/image/' . $id );?>">Видалити</a>
+                    <a href="<?=base_url('admin/banner/image/remove/' . $id );?>">Видалити</a>
                 </div>
             <?php else: ?>
                 <label for="advantage-img">Зображення</label>
