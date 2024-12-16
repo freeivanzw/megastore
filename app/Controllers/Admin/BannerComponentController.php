@@ -9,8 +9,9 @@ class BannerComponentController extends AdminController implements IComponent
 {
     private BannerComponentModel $model;
 
-    public function __construct()
+    public function __construct($request)
     {
+        $this->request = $request;
         $this->model = new BannerComponentModel();
     }
 
@@ -47,7 +48,21 @@ class BannerComponentController extends AdminController implements IComponent
      */
     public function edit(int $component_id, array $data) {
         $component = $this->model->where('component_id', $component_id)
-                ->find()[0];
+                                 ->find()[0];
+
+        $image_validate = $this->validate([
+            'image' => [
+                'uploaded[image]',
+                'is_image[image]',
+            ],
+        ]);
+
+        if ($image_validate) {
+            $image = $this->request->getFile('image');
+
+            $image_path = $this->model->saveImage($component, $image);
+            $component['image'] = $image_path;
+        }
 
         $newData = array_merge($component, $data);
 

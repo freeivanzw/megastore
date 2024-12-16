@@ -1,6 +1,6 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 text-center">
     <?php if ($image !== ''): ?>
-        <img src="#" class="w-100 h-100 position-absolute top-0 start-0" alt="background image" style="z-index: -1; object-fit: cover;">
+        <img src="<?= base_url($image); ?>" class="w-100 h-100 position-absolute top-0 start-0" alt="background image" style="z-index: -1; object-fit: cover;">
     <?php else: ?>
         <img src="<?= base_url('images/no_photo.png'); ?>" class="w-100 h-100 position-absolute top-0 start-0" alt="no photo background image" style="z-index: -1; object-fit: cover;">
     <?php endif; ?>
