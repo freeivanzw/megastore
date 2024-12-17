@@ -7,7 +7,7 @@
             </p>
             <h5 class="card-title mb-1">Назва: <?= $title; ?></h5>
             <a class="btn btn-primary btn-sm" href="<?= base_url('admin/component/' . $id); ?>">Редагувати</a>
-            <a class="btn btn-danger btn-sm" href="<?= base_url('admin/component/remove/?type=' . $type . '&id=' . $id); ?>">Видалити</a>
+            <a class="btn btn-danger btn-sm" href="<?= base_url('admin/component/remove/' . $type . '/' . $id); ?>">Видалити</a>
         </div>
 
         <!-- Right side: Position controls -->

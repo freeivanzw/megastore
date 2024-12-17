@@ -76,6 +76,15 @@ class MenuController extends AdminController
             throw new BadRequestException('menu_id must been integer');
         }
 
+        $components_model = new \App\Models\ComponentsModel();
+        $components_list = $components_model->getByMenuId($menu_id);
+
+        $components_controller = new \App\Controllers\Admin\ComponentsController();
+
+        foreach($components_list as $component) {
+            $components_controller->remove($component['type'], $component['id']);
+        }
+
         if (!$this->model->delete($menu_id) ) {
             throw new BadRequestException('this menu doesnt exits');
         }

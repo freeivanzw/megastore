@@ -141,20 +141,16 @@ class ComponentsController extends AdminController
     /**
      * Remove component
      */
-    public function remove()
+    public function remove($component_type, int $component_id)
     {
-        $component_type = $this->request->getGet('type');
-        $component_id = $this->request->getGet('id');
-
         $component_class = "\\App\\Controllers\\Admin\\" . ucfirst($component_type) . 'ComponentController';
 
         if (!class_exists($component_class)) {
-            throw new PageNotFoundException("not found this class: {$component_type}ComponentModel");
+            throw new PageNotFoundException("not found this class: {$component_type}ComponentController");
         }
         
-        $component_model = new $component_class();
-        $component_model->remove($component_id);
-
+        $component_controller = new $component_class();
+        $component_controller->remove($component_id);
         $this->model->delete($component_id);
         
         return redirect()->back();
