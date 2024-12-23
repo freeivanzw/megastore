@@ -135,7 +135,11 @@ class ComponentsController extends AdminController
         $this->model->save($current_component);
         $this->model->save($second_component);
 
-        return redirect()->back();
+        $link_model = new \App\Models\SiteLinksModel();
+        $menu_link_data = $link_model->where('menu_item_id', $current_component['menu_item_id'])
+                                ->find()[0];
+        
+        return redirect()->to('admin/' . $menu_link_data['url']);
     }
 
     /**
