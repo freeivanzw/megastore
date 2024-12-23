@@ -40,8 +40,9 @@ class PagesController extends AdminController
 
             $menu_details_data['component_idx'] = count($components);
 
-            $this->view->setLayout('Admin/Default')
-                       ->addComponent('Admin/Components/MenuDetails', $menu_details_data);
+            $this->view
+                 ->setLayout('Admin/Default')
+                 ->addComponent('Admin/Components/MenuDetails', $menu_details_data);
 
             foreach ($components as $key => $component) {
                 $controllerClass = "\\App\\Controllers\\Admin\\" . $component['type'] . 'ComponentController';

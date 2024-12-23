@@ -23,9 +23,9 @@ class AuthController extends AdminController
     {
         
         return $this->view
-            ->setLayout('Admin/Simple')
-            ->addComponent('Admin/Components/Login')
-            ->render();
+                    ->setLayout('Admin/Simple')
+                    ->addComponent('Admin/Components/Login')
+                    ->render();
     }
 
     /**

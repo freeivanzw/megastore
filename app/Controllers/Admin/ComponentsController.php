@@ -125,9 +125,10 @@ class ComponentsController extends AdminController
 
         $current_component = $this->model->find($component_id);
         
-        $second_component = $this->model->where('menu_item_id', $current_component['menu_item_id'])
-                                        ->where('number_order', $new_order)
-                                        ->find()[0];
+        $second_component = $this->model
+                                 ->where('menu_item_id', $current_component['menu_item_id'])
+                                 ->where('number_order', $new_order)
+                                 ->find()[0];
         
         $second_component['number_order'] = $current_component['number_order']; 
         $current_component['number_order'] = $new_order;
@@ -137,7 +138,7 @@ class ComponentsController extends AdminController
 
         $link_model = new \App\Models\SiteLinksModel();
         $menu_link_data = $link_model->where('menu_item_id', $current_component['menu_item_id'])
-                                ->find()[0];
+                                     ->find()[0];
         
         return redirect()->to('admin/' . $menu_link_data['url']);
     }
@@ -159,8 +160,9 @@ class ComponentsController extends AdminController
         $component_controller->remove($component_id);
         $this->model->delete($component_id);
 
-        $components_menu = $this->model->where('menu_item_id', $component['menu_item_id'])
-                                       ->find();
+        $components_menu = $this->model
+                                ->where('menu_item_id', $component['menu_item_id'])
+                                ->find();
 
         foreach ($components_menu as $k => $component_menu) {
             $component_menu['number_order'] = $k;

@@ -49,8 +49,9 @@ class ArticleComponentController extends AdminController implements IComponent
     public function edit(int $component_id, IncomingRequest $request)
     {
         $data = $request->getPost('data');
-        $component = $this->model->where('component_id', $component_id)
-                                 ->find()[0];
+        $component = $this->model
+                          ->where('component_id', $component_id)
+                          ->find()[0];
 
         $newData = array_merge($component, $data);
 
@@ -63,7 +64,8 @@ class ArticleComponentController extends AdminController implements IComponent
      */
     public function remove(int $component_id)
     {
-        $this->model->where('component_id', $component_id)
-                    ->delete();
+        $this->model
+             ->where('component_id', $component_id)
+             ->delete();
     }
 }

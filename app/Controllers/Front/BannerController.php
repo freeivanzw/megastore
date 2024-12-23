@@ -21,9 +21,10 @@ class BannerController extends FrontController implements IComponnet
         $component = $this->component_model->select('title')
                                            ->find($component_id);
         
-        $component_data = $this->model->select('subtitle, image')
-                                      ->where('component_id', $component_id)
-                                      ->find()[0];
+        $component_data = $this->model
+                               ->select('subtitle, image')
+                               ->where('component_id', $component_id)
+                               ->find()[0];
         
         $data = array_merge($component, $component_data);
         

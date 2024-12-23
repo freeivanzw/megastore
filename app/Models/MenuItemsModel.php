@@ -19,7 +19,7 @@ class MenuItemsModel extends Model
         $menu_main_item = $this->where('id', 1)->find()[0];
 
         $this->select('menu_items.*, site_links.url')
-            ->join('site_links', 'site_links.menu_item_id = menu_items.id');
+             ->join('site_links', 'site_links.menu_item_id = menu_items.id');
 
         $menu_items = $this->findAll();
 
