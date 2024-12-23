@@ -118,7 +118,7 @@ class ComponentsController extends AdminController
     /**
      * Method change position components in list
      */
-    public function changeOrder()
+    public function swapOrder()
     {
         $component_id = (int) $this->request->getGet('id');
         $new_order = (int) $this->request->getGet('order');
@@ -148,10 +148,21 @@ class ComponentsController extends AdminController
         if (!class_exists($component_class)) {
             throw new PageNotFoundException("not found this class: {$component_type}ComponentController");
         }
+
+        $component = $this->model->find($component_id);
         
         $component_controller = new $component_class();
         $component_controller->remove($component_id);
         $this->model->delete($component_id);
+
+        $components_menu = $this->model->where('menu_item_id', $component['menu_item_id'])
+                                       ->find();
+
+        foreach ($components_menu as $k => $component_menu) {
+            $component_menu['number_order'] = $k;
+
+            $this->model->save($component_menu);
+        }
         
         return redirect()->back();
     }
