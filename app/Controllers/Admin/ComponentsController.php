@@ -8,7 +8,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class ComponentsController extends AdminController
 {   
     private ComponentsModel $model;
-    private $components = ['article', 'banner'];
+    private $components = ['article', 'banner', 'contacts'];
 
     public function __construct()
     {
@@ -80,8 +80,8 @@ class ComponentsController extends AdminController
 
         $component_id = $this->model->getInsertID();
 
-        $component_model = new $component_class();
-        $component_model->add($component_id);
+        $component_controller = new $component_class();
+        $component_controller->add($component_id);
         
         return redirect()->back();
     }
