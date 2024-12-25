@@ -76,7 +76,7 @@
                 $($subitemsList).append(`
                     <li class="list-group-item pe-0" data-menu-id="${menuItem.id}"><div class="d-flex align-items-center">
                         <button class="btn btn-primary btn-sm me-2" data-action="edit-submenu">Save</button>
-                        <a href="${baseUrl}/admin/menu/${menuItem.id}">link</a>
+                        <a class="btn btn-primary btn-sm me-2" href="${baseUrl}/admin/menu/${menuItem.id}">link</a>
                         <input class="form-control form-control-sm me-2" data-object="menu-title" type="text" value="${menuItem.title}">
                         <button class="btn btn-success btn-sm me-2" data-action="add-submenu">[+]</button>
                         <button class="btn btn-danger btn-sm" data-action="remove-menu">[X]</button></div>

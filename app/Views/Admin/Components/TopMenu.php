@@ -10,7 +10,7 @@ function renderTopMenu($menu) {
                     echo '<div class="d-flex align-items-center">';
                         echo '<button class="btn btn-primary btn-sm me-2" data-action="edit-submenu">Save</button>';
 
-                        echo '<a href="' . base_url('admin/' . $menu_item['url']) . '">link</a>';
+                        echo '<a class="btn btn-secondary btn-sm me-2" href="' . base_url('admin/' . $menu_item['url']) . '">link</a>';
 
                         echo '<input class="form-control form-control-sm me-2" data-object="menu-title" type="text" value="' . htmlspecialchars($menu_item['title']) . '">';
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ContactsComponentsModel extends Model
+class ContactsComponentModel extends Model
 {
     protected $table      = 'contacts_component';
     protected $primaryKey = 'id';

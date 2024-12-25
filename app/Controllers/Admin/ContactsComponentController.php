@@ -2,16 +2,16 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\ContactsComponentsModel;
+use App\Models\ContactsComponentModel;
 use CodeIgniter\HTTP\IncomingRequest;
 
 class ContactsComponentController extends AdminController implements IComponent
 {
-    private ContactsComponentsModel $model;
+    private ContactsComponentModel $model;
 
     public function __construct()
     {
-        $this->model = new ContactsComponentsModel();
+        $this->model = new ContactsComponentModel();
     }
 
     /**
@@ -24,11 +24,11 @@ class ContactsComponentController extends AdminController implements IComponent
         $component = $this->model->where('component_id', $component_id)
                            ->find()[0];
 
-        // if (isset($component['phones'])) {
-        //     $phones_array = explode(',', $component['phones']);
+        if (isset($component['phones'])) {
+            $phones_array = explode(',', $component['phones']);
 
-        //     $component['phones'] = $phones_array;
-        // }
+            $component['phones'] = $phones_array;
+        }
 
         return $component;
     }
@@ -57,11 +57,11 @@ class ContactsComponentController extends AdminController implements IComponent
                           ->where('component_id', $component_id)
                           ->find()[0];
 
-        // if (isset($data['phones'])) {
-        //     $phones_str = implode(',', $data['phones']);
+        if (isset($data['phones'])) {
+            $phones_str = implode(',', $data['phones']);
 
-        //     $data['phones'] = $phones_str;
-        // }
+            $data['phones'] = $phones_str;
+        }
 
         if (isset($data['map'])) {
             $data['map'] = htmlentities($data['map']);
