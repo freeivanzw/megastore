@@ -19,7 +19,7 @@
                     <div class="contact-info">
                         <?php foreach ($phones as $phone): ?>
                             <div class="info-item">
-                                <p><?=$phone;?></p>
+                                <a href="tel:<?=$phone;?>"><?=$phone;?></a>
                             </div>
                         <?php endforeach; ?>
                     </div>

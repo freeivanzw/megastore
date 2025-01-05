@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use \App\Libraries\CustomRender;
 
 /**
  * Class BaseController
@@ -42,7 +43,7 @@ abstract class FrontController extends Controller
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
     protected $session;
-    protected $view;
+    protected CustomRender $view;
 
     /**
      * @return void

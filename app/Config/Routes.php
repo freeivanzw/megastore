@@ -53,6 +53,14 @@ $routes->group('admin', static function ($routes) {
             $routes->get('image/remove/(:num)', 'Admin\BannerComponentController::removeImage/$1');
         });
 
+        $routes->group('products', static function ($routes) {
+            $routes->get('/', 'Admin\ProductController::list');
+            $routes->post('/', 'Admin\ProductController::create');
+            $routes->get('(:num)', 'Admin\ProductController::details/$1');
+            $routes->post('(:num)', 'Admin\ProductController::edit/$1');
+            $routes->get('remove/(:num)', 'Admin\ProductController::delete/$1');
+        });
+
         $routes->get('(:any)', 'Admin\PagesController::renderPage');
     });
 

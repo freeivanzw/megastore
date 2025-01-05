@@ -44,5 +44,19 @@ class PagesController extends FrontController
             
             return $this->view->render();
         }
+
+        if ($linkInfo['type'] === 'product') {
+            $this->view->setLayout('Front/Default');
+            
+            $menu_model = new \App\Models\MenuItemsModel();
+
+            $this->view->addGlobalData('top_menu', $menu_model->getTopMenu());
+
+            $product_model = new \App\Models\ProductModel();
+
+            $data = $product_model->find($linkInfo['product_id']);
+
+            return $this->view->addComponent('Front/Components/ProductDetalis', $data)->render();
+        }
     }
 }

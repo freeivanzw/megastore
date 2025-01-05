@@ -15,7 +15,7 @@ class PagesController extends AdminController
     public function renderPage()
     {
         $siteLinks = new \App\Models\SiteLinksModel();
-    
+        
         $linkInfo = $siteLinks->getlinkInfo($this->request->getPath(), 'admin');
     
         if (!$linkInfo) {
@@ -55,7 +55,7 @@ class PagesController extends AdminController
                     $this->view->addComponent('Admin/Components/ComponentPreview', $component);
                 }
             }
-            
+
             return $this->view->render();
         }
     }

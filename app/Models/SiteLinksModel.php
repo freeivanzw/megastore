@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Model;
 
 class SiteLinksModel extends Model
@@ -24,10 +25,22 @@ class SiteLinksModel extends Model
         if ($type === 'admin') {
             $admin_url = $url_segments[1] ?? 'main-page';
 
-            return $this->where('url', $admin_url)->first();
+            $link = $this->where('url', $admin_url)->first();
+
+            if (!isset($link)) {
+                throw new PageNotFoundException('not found page');
+            }
+
+            return $link;
         }
 
         $frontUrl = $url_segments[0] !== '' ? $url_segments[0] : 'main-page';
+
+        $link = $this->where('url', $frontUrl)->first();
+
+        if (!isset($link)) {
+            throw new PageNotFoundException('not found page');
+        }
         
         return $this->where('url', $frontUrl)->first();
     }
