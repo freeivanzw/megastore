@@ -19,7 +19,7 @@
 <body>
     <?= $this->render('Front/Components/Header');?>
     
-    <div class="content template-12" data-some="info">
+    <div class="content my-local" data-some="local">
         <?= $content; ?>
     </div>
     
