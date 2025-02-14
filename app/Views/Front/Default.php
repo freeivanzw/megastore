@@ -19,7 +19,7 @@
 <body>
     <?= $this->render('Front/Components/Header');?>
     
-    <div class="content my-local-test" data-info="local-test">
+    <div class="content my-remote-test" data-info="remote-test">
         <?= $content; ?>
     </div>
     
